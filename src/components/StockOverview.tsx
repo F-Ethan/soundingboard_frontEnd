@@ -6,7 +6,7 @@ import { closeCircle, home, star, navigate, informationCircle, checkmarkCircle, 
 
 
 
-interface StockInfo {
+interface listItems {
   Symbol: string;
   Upper: Number;
   Lower: Number;
@@ -17,33 +17,42 @@ interface Props {
     i: number;
 }
 
+
 const StockOverview: React.FC<Props> = ({Stock, i}) => {
 
     const [ listItems, setListItems ] = useState<any>([]);
 
 
 
-      // React.useEffect(() => {
-      // sendRequest().then((data: any) => {
-      //         setListItems(data)
-      // });
-      // }, []);
+      React.useEffect(() => {
+      sendRequest().then((data: any) => {
+              setListItems(data)
+      });
+      }, []);
+
+      // Yahoo finace API 
+      // var options = {
+      //   method: 'GET',
+      //   url: 'https://yh-finance.p.rapidapi.com/stock/v2/get-summary',
+      //   params: {symbol: Stock, region: 'US'},
+      //   headers: {
+      //     'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+      //     'x-rapidapi-key': '63a51f3279msh18e8edbbf2f8ab4p136b71jsnb9c98ca45e18'
+      //   }
+      // };
 
       var options = {
         method: 'GET',
-        url: 'https://yh-finance.p.rapidapi.com/stock/v2/get-summary',
-        params: {symbol: Stock, region: 'US'},
-        headers: {
-          'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
-          'x-rapidapi-key': '63a51f3279msh18e8edbbf2f8ab4p136b71jsnb9c98ca45e18'
-        }
+        url: 'http://localhost:3000/',
+        params: {symbol: Stock},
+       
       };
 
 
       const sendRequest = () => {
+      console.log("Sending Get request")
       return axios.request(options).then((response: any) => {
-      // console.log(response);
-      return response.data;
+      return response.data[0];
       })
       };
 
@@ -57,14 +66,20 @@ const StockOverview: React.FC<Props> = ({Stock, i}) => {
         
         
         <IonItem key={i}>
-          <IonButton slot="start" color={listItems.color}>
-          {listItems.trade}
+          <IonButton slot="start" color="primary">
+          {listItems.lowwer}
           </IonButton>
-          <IonLabel> {listItems.company} </IonLabel>
+          <IonLabel color="primary"> {listItems.Symbol} </IonLabel>
           <IonButton slot="end">
-          ${listItems.price}
+          ${listItems.Upper}
           </IonButton>
         </IonItem>
+
+        // <IonItem color="secondary">
+        // <IonLabel>
+        //   Secondary Color Item
+        // </IonLabel>
+        // </IonItem>
 
   );
 };

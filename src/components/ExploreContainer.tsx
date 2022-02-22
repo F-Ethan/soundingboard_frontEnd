@@ -1,3 +1,23 @@
+// import './ExploreContainer.css';
+
+// interface ContainerProps {
+//   name: string;
+// }
+
+// const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
+//   return (
+//     <div className="container">
+//       <strong>{name}</strong>
+//       <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+//     </div>
+//   );
+// };
+
+// export default ExploreContainer;
+
+
+
+
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
@@ -6,39 +26,18 @@ import { closeCircle, home, star, navigate, informationCircle, checkmarkCircle, 
 import StockOverview from './StockOverview';
 
 
-interface StockInfo {
-  Symbol: string;
-  Upper: Number;
-  Lower: Number;
-}
-
-const stockInfo: StockInfo[] = [
-  {
-    Symbol: 'TSLA',
-    Upper: 1500,
-    Lower: 1000,
-  },
-  {
-    Symbol: 'ARKK',
-    Upper: 900,
-    Lower: 700,
-  },
-  {
-    Symbol: 'LMND',
-    Upper: 90,
-    Lower: 50,
-  },
-  {
-    Symbol: 'FUV',
-    Upper: 10,
-    Lower: 5,
-  },
-
-];
-
+let StockInfo: Array<string> = ['TSLA', 'ARKK', 'LMND', 'FUV'];
 
 const ExploreContainer: React.FC = () => {
   return (
+    
+
+
+
+
+
+
+
     <IonPage>
       <IonHeader>
         <IonToolbar>
@@ -48,11 +47,13 @@ const ExploreContainer: React.FC = () => {
       <IonContent>
         {/*-- Default Item --*/}
         
-        {stockInfo.map((stock, i) => {
+        {StockInfo.map((stock, i) => {
           return(
-            <StockOverview Stock={stock.Symbol} i={i} /> 
+            <StockOverview Stock={stock} i={i} /> 
           )
         })}
+
+        
        
         {/* <IonItem>
           <IonLabel>
