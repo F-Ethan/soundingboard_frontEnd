@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonList, IonText, IonAvatar, IonThumbnail, IonButton, IonIcon, IonDatetime, IonSelect, IonSelectOption, IonToggle, IonInput, IonCheckbox, IonRange, IonNote } from '@ionic/react';
-import { closeCircle, home, star, navigate, informationCircle, checkmarkCircle, shuffle } from 'ionicons/icons';
+import { closeCircle, home, star, navigate, informationCircle, checkmarkCircle, shuffle, thumbsUpOutline, arrowUp, arrowDown } from 'ionicons/icons';
 
 
 
@@ -16,6 +16,8 @@ interface Props {
     Stock: string;
     i: number;
 }
+
+let Actions: Array<string> = ['Buy', 'Sell', 'Hold'];
 
 
 const StockOverview: React.FC<Props> = ({Stock, i}) => {
@@ -64,25 +66,20 @@ const StockOverview: React.FC<Props> = ({Stock, i}) => {
   return (
  
         
-        
+       <div className='row'> 
         <IonItem key={i}>
-          <IonButton slot="start" color="primary">
-          {listItems.lowwer}
-          </IonButton>
-          <IonLabel color="primary"> {listItems.Symbol} </IonLabel>
-          <IonButton slot="end">
+          <IonItem slot="start" >
+          {Actions[Math.floor(Math.random() * 3)]}
+          </IonItem>
+          {/* <ion-icon name="thumbs-up-sharp"></ion-icon> */}
+          <IonIcon icon={arrowUp} />
+          <IonLabel > {listItems.Symbol} </IonLabel>
+          <IonItem slot="end">
           ${listItems.Upper}
-          </IonButton>
+          </IonItem>
         </IonItem>
-
-        // <IonItem color="secondary">
-        // <IonLabel>
-        //   Secondary Color Item
-        // </IonLabel>
-        // </IonItem>
-
+      </div>
   );
 };
 
 export default StockOverview;
-
